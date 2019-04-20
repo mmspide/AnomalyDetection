@@ -67,8 +67,12 @@ add_day_labels_datetime <- function(tsplot, breaks = 6, start = NULL, end = NULL
   }
   
   outplot <- tsplot + ggplot2::scale_x_datetime(breaks = minor_breaks,
-                                               labels = function(x) ifelse(as.POSIXlt(x, tz = "UTC")$hour != 0,strftime(x, format="%kh", tz="UTC"), strftime(x, format="%b %e", tz="UTC")), 
+                                               labels = function(x) ifelse(as.POSIXct(x, tz = "UTC")$hour != 0,strftime(x, format="%kh", tz="UTC"), strftime(x, format="%b %e", tz="UTC")), 
                                                expand = c(0, 0))
+  
+#  outplot <- tsplot + ggplot2::scale_x_datetime(breaks = minor_breaks,
+ #                                              labels = function(x) ifelse(as.POSIXlt(x, tz = "UTC")$hour != 0,strftime(x, format="%kh", tz="UTC"), strftime(x, format="%b %e", tz="UTC")), 
+  #                                             expand = c(0, 0))
   
   if (length(lines_at) > 0) {
     outplot <- outplot + ggplot2::geom_vline(xintercept = as.numeric(lines_at), color = "gray60")  
