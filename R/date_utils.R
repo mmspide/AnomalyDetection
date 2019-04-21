@@ -1,4 +1,5 @@
 format_timestamp <- function(indf, index = 1) {
+  print(indf)
   if (class(indf[[index]])[1] == "POSIXlt") {
     return(indf)
   }
